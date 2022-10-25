@@ -1,0 +1,377 @@
+{
+  "comments": [
+    {
+      "id": 1,
+      "title": "asd",
+      "content": "asd",
+      "customerId": 1,
+      "shipmentId": "5QOSfJU"
+    }
+  ],
+  "shipments": [
+    {
+      "id": "00002528",
+      "customerId": 1,
+      "enterpriseId": 1,
+      "origin": "Amazonas",
+      "destiny": "Lima",
+      "pickUpDate": "25/10/2022",
+      "deliveryDate": "27/10/2022",
+      "status": "Finished"
+    },
+    {
+      "id": "00002532",
+      "customerId": 1,
+      "enterpriseId": 2,
+      "origin": "Amazonas",
+      "destiny": "Lima",
+      "pickUpDate": "25/10/2022",
+      "deliveryDate": "27/10/2022",
+      "status": "Finished"
+    }
+  ],
+  "enterprises": [
+    {
+      "id": 1,
+      "name": "Sodimac S.A.C",
+      "ruc": "789 6543 2112",
+      "phoneNumber": "579 031 268",
+      "email": "blindadosac-789@gmail.com",
+      "priceBase": 12.5,
+      "factorWeight": 0.2,
+      "shippingTime": 48,
+      "score": 3.2
+    },
+    {
+      "id": 2,
+      "name": "Blindados S.A.C",
+      "ruc": "789 6543 2112",
+      "phoneNumber": "579 031 268",
+      "email": "blindadosac-789@gmail.com",
+      "priceBase": 12.5,
+      "factorWeight": 0.2,
+      "shippingTime": 48,
+      "score": 3.2
+    },
+    {
+      "id": 3,
+      "name": "Urbano S.A.C",
+      "ruc": "546 5466 5433",
+      "phoneNumber": "555 342 123",
+      "email": "urbanosac-543@gmail.com",
+      "priceBase": 12.3,
+      "factorWeight": 0.3,
+      "shippingTime": 72,
+      "score": 2.8
+    }
+  ],
+  "customers": [
+    {
+      "id": 1,
+      "email": "italosilva@gmail.com",
+      "name": "Italo Silva S.A.C",
+      "phoneNumber": "902 952 757",
+      "ruc": "888 2651 4421",
+      "subscriptionPlan": 0
+    }
+  ],
+  "vehicles": [
+    {
+      "id": 1,
+      "enterpriseId": 1,
+      "brand": "Toyota",
+      "licensePlate": "BBT-231",
+      "year": "2020",
+      "model": "TEF25",
+      "maintenanceDate": "20/02/2021",
+      "vehicleType": "Free"
+    },
+    {
+      "id": 2,
+      "enterpriseId": 2,
+      "brand": "Chevrolet",
+      "licensePlate": "DDE-251",
+      "year": 2020,
+      "model": "RE2",
+      "maintenanceDate": "12/07/2021",
+      "vehicleType": "Free"
+    },
+    {
+      "id": 3,
+      "enterpriseId": 2,
+      "brand": "Toyota",
+      "licensePlate": "VET-965",
+      "year": 2017,
+      "model": "TEF25",
+      "maintenanceDate": "21/05/2021",
+      "vehicleType": "Free"
+    },
+    {
+      "id": 4,
+      "enterpriseId": 3,
+      "brand": "Hyundai",
+      "licensePlate": "SFF-232",
+      "year": 2021,
+      "model": "RER3",
+      "maintenanceDate": "02/12/2021",
+      "vehicleType": "Free"
+    },
+    {
+      "id": 5,
+      "enterpriseId": 3,
+      "brand": "Suzuki",
+      "licensePlate": "WSA-332",
+      "year": 2019,
+      "model": "TTA",
+      "maintenanceDate": "10/11/2021",
+      "vehicleType": "Free"
+    },
+    {
+      "id": 6,
+      "enterpriseId": 3,
+      "brand": "Nissan",
+      "licensePlate": "GTA-431",
+      "year": 2021,
+      "model": "NSA1",
+      "maintenanceDate": "24/10/2021",
+      "vehicleType": "Free"
+    },
+    {
+      "id": 7,
+      "brand": "Nissa",
+      "licensePlate": "GHV-543",
+      "year": "2022",
+      "model": "YIU1",
+      "maintenanceDate": "2022-10-18T05:00:00.000Z",
+      "vehicleType": "In use",
+      "apiId": "v1"
+    }
+  ],
+  "addresses": [
+    {
+      "id": 1,
+      "shipmentId": 1,
+      "typeAddress": "Department",
+      "address": "dont know",
+      "urbanization": "This urbanization",
+      "reference": "This building"
+    },
+    {
+      "id": 2,
+      "shipmentId": 1,
+      "typeAddress": "Department",
+      "address": "dont know",
+      "urbanization": "This urbanization",
+      "reference": "This building"
+    }
+  ],
+  "payments": [
+    {
+      "id": 1,
+      "creditCard": 5106359056009527,
+      "amount": 30,
+      "currency": "soles",
+      "date": "2022-04-08",
+      "shipmentId": "00002532"
+    },
+    {
+      "id": 2,
+      "creditCard": 4901033815303980,
+      "amount": 80,
+      "currency": "soles",
+      "date": "2022-04-11",
+      "shipmentId": "00002531"
+    },
+    {
+      "id": 3,
+      "creditCard": 348025428219123,
+      "amount": 54,
+      "currency": "soles",
+      "date": "2022-02-19",
+      "shipmentId": "00002530"
+    },
+    {
+      "id": 4,
+      "creditCard": 4901033815303980,
+      "amount": 50,
+      "currency": "soles",
+      "date": "2022-03-21",
+      "shipmentId": "00002529"
+    },
+    {
+      "id": 5,
+      "creditCard": 3901033815303980,
+      "amount": 30,
+      "currency": "soles",
+      "date": "2022-04-15",
+      "shipmentId": "00002528"
+    },
+    {
+      "id": 6,
+      "creditCard": 4901033815303980,
+      "amount": 50,
+      "currency": "soles",
+      "date": "2022-01-03",
+      "shipmentId": "00002527"
+    },
+    {
+      "id": 7,
+      "creditCard": 3901033815303980,
+      "amount": 80,
+      "currency": "soles",
+      "date": "2022-04-28",
+      "shipmentId": "00002526"
+    },
+    {
+      "id": 8,
+      "creditCard": 4901033815303980,
+      "amount": 69,
+      "currency": "soles",
+      "date": "2022-02-20",
+      "shipmentId": "00002525"
+    },
+    {
+      "id": 9,
+      "creditCard": 4901033815303980,
+      "amount": 120,
+      "currency": "soles",
+      "date": "2022-02-22",
+      "shipmentId": "00002524"
+    },
+    {
+      "id": 10,
+      "creditCard": 5901033815303980,
+      "amount": 75,
+      "currency": "soles",
+      "date": "2022-03-30",
+      "shipmentId": "00002523"
+    },
+    {
+      "id": 11,
+      "creditCard": 3901033815303980,
+      "amount": 100,
+      "currency": "soles",
+      "date": "2022-01-04",
+      "shipmentId": "00002522"
+    },
+    {
+      "id": 12,
+      "creditCard": 4901033815303980,
+      "amount": 70,
+      "currency": "soles",
+      "date": "2022-01-23",
+      "shipmentId": "00002521"
+    },
+    {
+      "id": 13,
+      "creditCard": 5901033815303980,
+      "amount": 93,
+      "currency": "soles",
+      "date": "2022-01-28",
+      "shipmentId": "00002520"
+    },
+    {
+      "id": 14,
+      "creditCard": 4901033815303980,
+      "amount": 95,
+      "currency": "dollars",
+      "date": "2022-01-29",
+      "shipmentId": "00002519"
+    },
+    {
+      "id": 15,
+      "creditCard": 4901033815303980,
+      "amount": 12,
+      "currency": "soles",
+      "date": "2022-01-30",
+      "shipmentId": "00002518"
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "email": "italosilva@gmail.com",
+      "password": "$2a$10$uTb4/T04j4uRPr/MLYbhNueafT8zYZLxXBVFoxZKDkBc32afMjse.",
+      "userType": "customer",
+      "name": "Italo Silva",
+      "ruc": "888 2651 4421",
+      "phoneNumber": "902 952 757"
+    },
+    {
+      "id": 2,
+      "email": "blindadosac-789@gmail.com",
+      "password": "$2a$10$B7OLhFbjQj3Kehb2l/atleSbo6XYArr9p4LAMHl9/nqH9NVREYqmG",
+      "userType": "enterprise",
+      "name": "Blindados S.A.C",
+      "ruc": "789 6543 2112",
+      "phoneNumber": "579 031 268"
+    },
+    {
+      "id": 3,
+      "email": "urbanosac-543@gmail.com",
+      "password": "$2a$10$j0lcPlFUvZ5yNfcR95C1K.hhDxiAuaVgCwlVDk08UfG0EUgSwfjiW",
+      "userType": "enterprise",
+      "name": "Urbano S.A.C",
+      "ruc": "546 5466 5433",
+      "phoneNumber": "555 342 123"
+    }
+  ],
+  "notifications": [
+    {
+      "id": 1,
+      "customerId": 1,
+      "shipmentId": "00002528",
+      "name": "Blindados S.A.C",
+      "content": "Shipment 5QOSfJU is ",
+      "date": "16:30"
+    },
+    {
+      "id": 2,
+      "customerId": 1,
+      "shipmentId": "00002528",
+      "name": "Blindados S.A.C",
+      "content": "Shipment 5QOSfJU is ",
+      "date": "11:00"
+    },
+    {
+      "id": 3,
+      "enterpriseId": 1,
+      "shipmentId": "00002532",
+      "name": "Sodimac S.A.C",
+      "content": "Shipment 00002519 is ",
+      "date": "Yesterday"
+    }
+  ],
+  "locations": [
+    {
+      "id": 1,
+      "lat": -12.090795,
+      "lng": -77.023148
+    },
+    {
+      "id": 2,
+      "lat": -12.096558,
+      "lng": -76.995193
+    },
+    {
+      "id": 3,
+      "lat": -12.103681,
+      "lng": -76.963425
+    },
+    {
+      "id": 4,
+      "lat": -12.058992,
+      "lng": -77.028072
+    },
+    {
+      "id": 5,
+      "lat": -12.071706,
+      "lng": -77.061959
+    },
+    {
+      "id": 6,
+      "lat": -12.051538,
+      "lng": -77.086465
+    }
+  ]
+}
