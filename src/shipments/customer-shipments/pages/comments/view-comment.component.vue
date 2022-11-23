@@ -80,7 +80,7 @@ export default {
     getCustomerId(){
       const auth=JSON.parse(localStorage.getItem("auth"));
       if(auth) {
-        this.userId = auth.user.id
+        this.userId = auth.id;
       }
     },
   },

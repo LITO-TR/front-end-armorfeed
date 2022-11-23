@@ -10,6 +10,6 @@ export class PaymentsApiService {
   }
 
   findPaymentByShipmentId(shipmentId) {
-    return http.get(`/payments?shipmentId=${shipmentId}`);
+    return http.get(`/payments/shipment/${shipmentId}`);
   }
 }

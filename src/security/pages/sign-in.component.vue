@@ -60,7 +60,7 @@
 <script>
 import { required } from "@vuelidate/validators";
 import { useVuelidate } from "@vuelidate/core";
-import SignInService from "../../services/sign-in.service";
+import SignInService from "../../shared/services/sign-in.service";
 export default {
   name: "sign-in",
   setup: () => ({ v$: useVuelidate() }),
@@ -88,6 +88,18 @@ export default {
       this.notFound = false;
       if (isFormValid) {
         const loginResource = this.loginDto();
+        this.$store
+          .dispatch("auth/login", loginResource)
+          .then((response) => {
+            this.$dataTransfer.user = response.data;
+            this.$emit("user-logged");
+          })
+          .catch((error) => {
+            document.getElementById("password").focus();
+            console.log(error.message)
+          });
+      }
+      /*
         await SignInService.login(loginResource)
           .then((response) => {
             localStorage.setItem("auth", JSON.stringify(response.data));
@@ -106,8 +118,7 @@ export default {
             )
               alert("Service not available");
             else alert("An error has occurred, contact the area in charge");
-          });
-      }
+          });*/
     },
     loginDto() {
       return {

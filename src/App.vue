@@ -1,6 +1,6 @@
 <script>
-import AppNavigation from "./shared/pages/navigation/navigation.component.vue";
-import AppFooter from "./shared/pages/footer/footer.component.vue";
+import AppNavigation from "./shared/pages/navigation.component.vue";
+import AppFooter from "./shared/pages/footer.component.vue";
 
 export default {
   name: "App",
@@ -16,10 +16,11 @@ export default {
   methods: {
     userLogged() {
       const auth = JSON.parse(localStorage.getItem("auth"));
+      console.log(auth)
       if (auth) {
-        this.userId = auth.user.id;
-        this.userType = auth.user.userType;
-        this.userName = auth.user.name;
+        this.userId = auth.id;
+        this.userType = auth.userType;
+        this.userName = auth.name;
         if (this.userType === "customer") {
           this.navigation = [
             {

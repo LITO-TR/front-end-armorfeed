@@ -142,7 +142,7 @@ export default {
     getCustomerId(){
       const auth=JSON.parse(localStorage.getItem("auth"));
       if(auth) {
-        this.userId = auth.user.id
+        this.userId = auth.id;
       }
     },
     openNew() {
@@ -178,7 +178,7 @@ export default {
         } else {
           this.comment.id = 0;
           this.comment.shipmentId = this.shipmentId;
-          this.comment.customerId=this.userId;
+          this.comment.customerId = this.userId;
           console.log(this.comment);
           //this.comment = this.getStorableComment(this.comment);
           this.commentsService.create(this.comment).then((response) => {

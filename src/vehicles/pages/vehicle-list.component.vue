@@ -308,7 +308,7 @@ export default {
   created() {
     const auth=JSON.parse(localStorage.getItem("auth"));
     if(auth) {
-      this.userId = auth.user.id
+      this.userId = auth.id
     }
     console.log(this.userId)
     this.vehiclesService = new VehiclesApiService();
@@ -370,7 +370,7 @@ export default {
             });
         } else {
           this.vehicle.id = 0;
-          this.vehicle.enterpriseId = this.enterpriseId;
+          this.vehicle.enterpriseId = this.userId;
           console.log(this.vehicle);
           this.vehicle = this.getStorableVehicle(this.vehicle);
           this.vehiclesService.create(this.vehicle).then((response) => {

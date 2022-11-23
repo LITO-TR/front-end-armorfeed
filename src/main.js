@@ -23,6 +23,7 @@ import Rating from "primevue/rating";
 import Toast from "primevue/toast";
 import InputMask from "primevue/inputmask";
 import VueGoogleMaps from '@fawmi/vue-google-maps'
+import Store from "./store";
 
 //PrimeVue Styles
 import "/node_modules/primeflex/primeflex.css";
@@ -49,6 +50,8 @@ app.use(router);
 app.use(PrimeVue, { ripple: true });
 
 app.use(ToastService);
+
+app.use(Store);
 
 app.use(VueGoogleMaps, {
   load: {

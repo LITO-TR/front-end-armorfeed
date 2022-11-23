@@ -96,8 +96,10 @@ export default {
     this.customerShipmentsApiService = new CustomerShipmentsApiService();
     this.customerShipmentsApiService.getShipmentById(this.shipmentId).then( response => {
       this.customerShipment = response.data;
+      console.log(this.customerShipment);
       this.customerShipmentsApiService.getEnterpriseById(this.customerShipment.enterpriseId).then( response => {
         this.enterprise = response.data;
+        console.log(this.enterprise)
       });
     });
   }

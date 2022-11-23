@@ -14,6 +14,7 @@
       ></pv-column>
       <pv-column :exportable="false" style="min-width: 8rem">
         <template #body="slotProps">
+          <pv-button icon="pi pi-car" class="p-button-text p-button-rounded" />
           <pv-button
             icon="pi pi-pencil"
             class="p-button-text p-button-rounded"

@@ -265,13 +265,13 @@ export default {
       let today = new Date();
       today.setSeconds(enterprise.shippingTime * 3600);
       return (
-        today.getFullYear() + "/" + today.getMonth() + "/" + today.getDate()
+        today.getFullYear() + "-" + today.getMonth() + "-" + today.getDate()
       );
     },
     getPickUpDate() {
       let date = new Date();
       date.setSeconds(1 * 86400);
-      return date.getFullYear() + "/" + date.getMonth() + "/" + date.getDate();
+      return date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate();
     },
     getDateShipmentInFormat(date) {
       let newDate = new Date(date);

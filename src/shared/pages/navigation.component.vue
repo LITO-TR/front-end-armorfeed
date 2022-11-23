@@ -31,9 +31,23 @@
           icon="pi pi-user"
           icon-pos="left"
           :label="this.userName"
+          @click="toggleUser"
         ></pv-button>
       </template>
     </pv-tool-bar>
+    <pv-overlay-panel
+      ref="user"
+      style="width: 200px"
+      :dismissable="true"
+      el="el"
+    >
+      <pv-button
+        @click="logOut"
+        icon="pi pi-power-off"
+        class="p-button-text p-button-danger w-full"
+        label="Log Out"
+      ></pv-button>
+    </pv-overlay-panel>
     <pv-overlay-panel ref="op" style="width: 300px" :dismissable="true" el="el">
       <div class="p-fluid">
         <h3>Settings</h3>
@@ -41,16 +55,6 @@
         <div class="field flex">
           <pv-button class="mr-1" icon="pi pi-sun" label="Light"></pv-button>
           <pv-button class="ml-1" icon="pi pi-moon" label="Dark"></pv-button>
-        </div>
-        <pv-divider></pv-divider>
-        <div class="field" v-if="this.userType">
-          <pv-button
-            @click="logOut"
-            icon="pi pi-power-off"
-            class="p-button-text p-button-danger"
-            label="Log Out"
-          ></pv-button>
-          <pv-divider></pv-divider>
         </div>
       </div>
     </pv-overlay-panel>
@@ -64,13 +68,9 @@
 </template>
 
 <script>
-import Notifications from "../../../notifications/pages/notifications.vue";
-import {
-  CustomerShipmentsApiService
-} from "../../../shipments/customer-shipments/services/customer-shipments-api.service";
-import {
-  EnterpriseShipmentsService
-} from "../../../shipments/enterprise-shipments/services/enterprise-shipments.service";
+import Notifications from "../../notifications/pages/notifications.vue";
+import { CustomerShipmentsApiService } from "../../shipments/customer-shipments/services/customer-shipments-api.service";
+import { EnterpriseShipmentsService } from "../../shipments/enterprise-shipments/services/enterprise-shipments.service";
 
 export default {
   name: "navigation-shipment",
@@ -85,13 +85,33 @@ export default {
           icon: "pi pi-fw pi-calendar",
           to: `/enterprise/0/shipments`,
         },
-        { label: "My Vehicles", icon: "pi pi-car", to: "/enterprise/0/vehicles" },
-        { label: "My Payments", icon: "pi pi-money-bill", to: "/enterprise/0/payments" },
+        {
+          label: "My Vehicles",
+          icon: "pi pi-car",
+          to: "/enterprise/0/vehicles",
+        },
+        {
+          label: "My Payments",
+          icon: "pi pi-money-bill",
+          to: "/enterprise/0/payments",
+        },
       ],
       navigationCustomer: [
-        { label: "Quotation", icon: "pi pi-fw pi-home", to: "/customers/0/quotations"},
-        { label: "My shipments", icon: "pi pi-fw pi-calendar", to: "/customers/0/shipments" },
-        { label: "My Payments", icon: "pi pi-money-bill", to: "/customers/0/payments" },
+        {
+          label: "Quotation",
+          icon: "pi pi-fw pi-home",
+          to: "/customers/0/quotations",
+        },
+        {
+          label: "My shipments",
+          icon: "pi pi-fw pi-calendar",
+          to: "/customers/0/shipments",
+        },
+        {
+          label: "My Payments",
+          icon: "pi pi-money-bill",
+          to: "/customers/0/payments",
+        },
       ],
       selectedTabs: {
         shipments: false,
@@ -105,6 +125,10 @@ export default {
       event.preventDefault();
       this.$refs.op.toggle(event);
     },
+    toggleUser(event) {
+      event.preventDefault();
+      this.$refs.user.toggle(event);
+    },
     openNotification(event) {
       event.preventDefault();
       this.$refs.nt.toggle(event);
@@ -112,7 +136,7 @@ export default {
     async logOut() {
       this.$dataTransfer.canDisplayNavigation = false;
       this.user = null;
-      await localStorage.removeItem("auth");
+      this.$store.dispatch("auth/logout");
       await this.$emit("sign-off");
       await this.$router.push({ name: "root" });
       this.$refs.op.hide();
@@ -132,8 +156,8 @@ export default {
       });
     },
     UserId() {
-      return (!this.user)? this.userId: this.user.id;
-    }
+      return !this.user ? this.userId : this.user.id;
+    },
   },
   props: {
     items: Array,
@@ -143,22 +167,42 @@ export default {
     navigation: Array,
   },
   updated() {
-    if(this.$dataTransfer.canDisplayNavigation) {
+    if (this.$dataTransfer.canDisplayNavigation) {
       this.activeTab = 1;
-      this.user = JSON.parse(localStorage.getItem("auth")).user;
+      this.user = JSON.parse(localStorage.getItem("auth"));
       this.navigationEnterprise = [
         {
           label: "My shipments",
           icon: "pi pi-fw pi-calendar",
           to: `/enterprise/${this.user.id}/shipments`,
         },
-        { label: "My Vehicles", icon: "pi pi-car", to: "/enterprise/" + this.user.id + "/vehicles" },
-        { label: "My Payments", icon: "pi pi-money-bill", to: "/enterprise/" + this.user.id + "/payments" },
+        {
+          label: "My Vehicles",
+          icon: "pi pi-car",
+          to: "/enterprise/" + this.user.id + "/vehicles",
+        },
+        {
+          label: "My Payments",
+          icon: "pi pi-money-bill",
+          to: "/enterprise/" + this.user.id + "/payments",
+        },
       ];
       this.navigationCustomer = [
-        { label: "Quotation", icon: "pi pi-fw pi-home", to: "/customers/" + this.user.id + "/quotations" },
-        { label: "My shipments", icon: "pi pi-fw pi-calendar", to: "/customers/" + this.user.id + "/shipments" },
-        { label: "My Payments", icon: "pi pi-money-bill", to: "/customers/" + this.user.id + "/payments" },
+        {
+          label: "Quotation",
+          icon: "pi pi-fw pi-home",
+          to: "/customers/" + this.user.id + "/quotations",
+        },
+        {
+          label: "My shipments",
+          icon: "pi pi-fw pi-calendar",
+          to: "/customers/" + this.user.id + "/shipments",
+        },
+        {
+          label: "My Payments",
+          icon: "pi pi-money-bill",
+          to: "/customers/" + this.user.id + "/payments",
+        },
       ];
     }
   },

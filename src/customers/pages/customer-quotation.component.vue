@@ -86,25 +86,28 @@ export default {
         customerId: this.userId,
         enterpriseId: this.formObject.enterpriseId,
         origin: this.formObject.origin,
+        originTypeAddress: this.formObject.originDetail.typeDomicile,
+        originAddress: this.formObject.originDetail.address,
+        originUrbanization: this.formObject.originDetail.urbanization,
+        originReference: this.formObject.originDetail.reference,
         destiny: this.formObject.destination,
+        destinyTypeAddress: this.formObject.destinationDetail.typeDomicile,
+        destinyAddress: this.formObject.destinationDetail.address,
+        destinyUrbanization: this.formObject.destinationDetail.urbanization,
+        destinyReference: this.formObject.destinationDetail.reference,
         pickUpDate: this.formObject.pickUpDate,
         deliveryDate: this.formObject.deliveryDate,
-        status: this.formObject.status,
+        status: 0,
       };
-      const addressOrigin = this.formObject.originDetail;
-      const addressDestiny = this.formObject.destinationDetail;
       const payment = this.formObject.payment;
-      this.createShipmentWithoutAPI(shipment, addressOrigin, addressDestiny, payment);
+      this.createShipmentWithoutAPI(shipment, payment);
     },
-    async createShipmentWithoutAPI(shipment, addressOrigin, addressDestiny, payment) {
+    async createShipmentWithoutAPI(shipment, payment) {
+      console.log(shipment);
       await ShipmentsService.create(shipment)
         .then(async (response) => {
-          addressOrigin.shipmentId = response.data.id;
-          await this.createAddressWithoutAPI(addressOrigin);
           payment.shipmentId = response.data.id;
           await this.createPaymentWithoutAPI(payment);
-          addressDestiny.shipmentId = response.data.id;
-          await this.createAddressWithoutAPI(addressDestiny);
           this.$toast.add({
             severity: "success",
             summary: "Order submitted",
@@ -120,10 +123,11 @@ export default {
           await this.$router.push({ path: "quotations" });
         })
         .catch((error) => {
+          console.log(error);
           this.$toast.add({
             severity: "error",
             summary: "Failed order",
-            detail: "An error occurred: " + error.message(),
+            detail: "An error occurred: " + error.message,
             life: 4000,
           });
         });
@@ -192,7 +196,7 @@ export default {
   mounted() {
     this.$nextTick(() => {
       const auth = JSON.parse(localStorage.getItem("auth"));
-      this.userId = auth.user.id;
+      this.userId = auth.id;
     });
   },
 };

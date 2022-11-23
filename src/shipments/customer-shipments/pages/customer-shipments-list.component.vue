@@ -32,6 +32,7 @@ export default {
     }
   },
   created(){
+    const statuses = ['Pending','In progress', 'Finished'];
     this.customerShipmentsApiService = new  CustomerShipmentsApiService();
     this.customerShipmentsApiService.findByCustomerId(this.id).then(response => {
       this.customerShipments = response.data;
@@ -40,7 +41,15 @@ export default {
       this.customerShipments.forEach( shipment => {
         this.$dataTransfer.addCustomerShipmentId(shipment.id);
       });
+      this.customerShipments = this.customerShipments.map( shipment => {
+        const newShipment = {...shipment};
+        newShipment.status = statuses[newShipment.status];
+        return newShipment;
+      });
+      this.currentCustomerShipments = this.customerShipments;
+      console.log(this.customerShipments);
       console.log(this.$dataTransfer.shipmentsIds);
+      console.log(this.id);
     });
   },
   methods : {

@@ -114,3 +114,6 @@ npm run lint
 ```
 ### Prueba
 >>>>>>> feature/profile
+=======
+# Front-end
+>>>>>>> b9d828cc25c7b642dc5ed4ea977d32e7bdd4e0ae

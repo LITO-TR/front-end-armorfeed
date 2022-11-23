@@ -142,11 +142,9 @@ export default {
   methods: {
     complete() {
       const payment = {
-        enterpriseId: this.formObject.enterpriseId,
-        creditCard: this.creditCardNumber,
         amount: this.formObject.amount,
         currency: "USD",
-        date: this.formObject.pickUpDate
+        paymentDate: this.formObject.pickUpDate
       };
       this.$emit("complete", {
         formData: {
@@ -166,7 +164,7 @@ export default {
     getPickUpDate() {
       let date = new Date();
       date.setSeconds(1 * 86400);
-      return date.getFullYear() + "/" + date.getMonth() + "/" + date.getDate();
+      return date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate();
     },
   },
   mounted() {

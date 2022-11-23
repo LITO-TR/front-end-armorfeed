@@ -20,8 +20,7 @@
         <pv-column field="paymentMonthYearDate" header="Date"></pv-column>
         <pv-column field="shipmentId" header="Code Shipping"
                    class="bg-gray-200 border-primary hover:bg-gray-500"></pv-column>
-        <pv-column field="date" header="Payment Date" class="bg-gray-200 border-primary"></pv-column>
-        <pv-column field="contact" v-bind:header="contact" class="bg-gray-200 border-primary"></pv-column>
+        <pv-column field="paymentDate" header="Payment Date" class="bg-gray-200 border-primary"></pv-column>
         <pv-column field="amount" header="Amount" class="bg-gray-200 border-primary">
           <template #body="slotProps">
             {{ formatCurrency(slotProps.data.amount) }}
@@ -92,31 +91,10 @@ export default {
       return this.monthNames[date.getMonth()] + "-" + date.getFullYear();
     },
     getDisplayablePayment(payment) {
-      payment.paymentMonthYearDate = this.getLongMonthName(new Date(payment.date));
+      payment.paymentMonthYearDate = this.getLongMonthName(new Date(payment.paymentDate));
       //console.log(payment.date)
-      this.enterpriseShipmentService.getShipmentById(payment.shipmentId).then(
-        (response) => {
-          if(this.$dataTransfer.customerShipmentsIds.length === 0){
-            this.customerShipmentService.getCustomerById(response.data.customerId).then(
-              (customer) => {
-                payment.contact = customer.data.name
-                  //console.log(payment.contact)
-                this.contact='Customer';
-              },
 
-            )
-          }
-          else {
-            this.enterpriseShipmentService.getEnterpriseById(response.data.enterpriseId).then(
-              (customer) => {
-                payment.contact = customer.data.name
-                this.contact='Enterprise'
-              }
-            )
-          }
-        }
-      );
-      payment.dateShort = payment.date.substring(0, 7);
+      payment.dateShort = payment.paymentDate.substring(0, 7);
       //console.log(payment);
       return payment;
     },
@@ -126,7 +104,7 @@ export default {
           (shipmentId) => {
             this.paymentsService.findPaymentByShipmentId(shipmentId).then(
               (payment) => {
-                this.payments.push(payment.data[0])
+                this.payments.push(payment.data)
                 console.log(this.payments);
                 this.payments.forEach(
                   (payment) =>
@@ -143,7 +121,7 @@ export default {
         (shipmentId) => {
           this.paymentsService.findPaymentByShipmentId(shipmentId).then(
             (payment) => {
-              this.payments.push(payment.data[0]);
+              this.payments.push(payment.data);
               this.payments.forEach(
                 (payment) =>
                 {

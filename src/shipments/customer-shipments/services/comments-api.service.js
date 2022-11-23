@@ -17,6 +17,6 @@ export class CommentsApiService {
     return http.get(`/comments/${id}`);
   }
   getCommentsByShipmentId(shipmentId) {
-    return http.get(`/comments?shipmentId=${shipmentId}`);
+    return http.get(`/shipment/${shipmentId}/comments`);
   }
 }

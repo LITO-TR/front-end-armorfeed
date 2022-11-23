@@ -135,16 +135,6 @@
       "model": "NSA1",
       "maintenanceDate": "24/10/2021",
       "vehicleType": "Free"
-    },
-    {
-      "id": 7,
-      "brand": "Nissa",
-      "licensePlate": "GHV-543",
-      "year": "2022",
-      "model": "YIU1",
-      "maintenanceDate": "2022-10-18T05:00:00.000Z",
-      "vehicleType": "In use",
-      "apiId": "v1"
     }
   ],
   "addresses": [

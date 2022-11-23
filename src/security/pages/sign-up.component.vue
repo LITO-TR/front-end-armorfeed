@@ -38,13 +38,45 @@
             >
           </div>
           <div class="field mx-2">
-            <pv-input-text
-              v-model="name"
-              placeholder="Name or Social reason"
-            ></pv-input-text>
+            <pv-input-text v-model="name" placeholder="Name"></pv-input-text>
             <small v-show="!v$.name.$model && submitted" class="p-error"
               >Name is required.</small
             >
+          </div>
+          <div class="field mx-2" v-if="userType === 'enterprise'">
+            <pv-input-number
+              class="mb-2"
+              v-model="priceBase"
+              placeholder="Price Base"
+              mode="decimal"
+              :minFractionDigits="2"
+            ></pv-input-number>
+            <pv-input-number
+              class="mb-2"
+              v-model="factorWeight"
+              placeholder="Factor Weight"
+              mode="decimal"
+              :minFractionDigits="2"
+            ></pv-input-number>
+            <pv-input-number
+              v-model="shippingTime"
+              placeholder="Shipping Time"
+            ></pv-input-number>
+          </div>
+          <div class="field mx-2" v-else-if="userType === 'customer'">
+            <pv-input-text
+              v-model="lastname"
+              placeholder="Lastname"
+            ></pv-input-text>
+          </div>
+          <div class="field mx-2">
+            <pv-input-text
+              v-model="description"
+              placeholder="Description"
+            ></pv-input-text>
+          </div>
+          <div class="field mx-2">
+            <pv-input-text v-model="photo" placeholder="Photo"></pv-input-text>
           </div>
           <div class="field md:flex m-2 md:mb-2">
             <div class="md:mr-1">
@@ -191,7 +223,7 @@
 <script>
 import { required, email } from "@vuelidate/validators";
 import { useVuelidate } from "@vuelidate/core";
-import SignUpService from "../../services/sign-up.service.js";
+import SignUpService from "../../shared/services/sign-up.service.js";
 export default {
   name: "sign-up",
   setup: () => ({ v$: useVuelidate() }),
@@ -216,8 +248,14 @@ export default {
       email: null,
       password: null,
       passwordRepeat: null,
+      description: null,
+      photo: null,
       accept: null,
       notMatch: false,
+      priceBase: null,
+      factorWeight: null,
+      shippingTime: null,
+      lastname: null,
     };
   },
   computed: {
@@ -276,13 +314,31 @@ export default {
       this.$router.push({ name: "sign-in" });
     },
     createNewUser() {
+      if (this.userType === "customer") {
+        return {
+          email: this.email,
+          password: this.password,
+          name: this.name,
+          ruc: this.ruc.split(" ").join(""),
+          phoneNumber: this.cellPhone.split(" ").join(""),
+          description: this.description,
+          photo: this.photo,
+          lastname: this.lastname,
+          subscriptionPlan: 0,
+        };
+      }
       return {
         email: this.email,
         password: this.password,
-        userType: this.userType,
         name: this.name,
-        ruc: this.ruc,
-        cellPhone: this.cellPhone,
+        ruc: this.ruc.split(" ").join(""),
+        phoneNumber: this.cellPhone.split(" ").join(""),
+        priceBase: this.priceBase,
+        factorWeight: this.factorWeight,
+        shippingTime: this.shippingTime,
+        description: this.description,
+        photo: this.photo,
+        score: 0,
       };
     },
     async handleSubmit(isFormValid) {
@@ -291,8 +347,25 @@ export default {
         if (this.password === this.passwordRepeat) {
           this.notMatch = false;
           const newUser = this.createNewUser();
-          await this.signUpUser(newUser);
-          this.isConfirm = true;
+          console.log(newUser);
+          if (this.userType === "customer") {
+            this.$store
+              .dispatch("auth/registerCustomer", newUser)
+              .then((response) => {
+                this.isConfirm = true;
+                this.resetForm();
+                console.log(response.data);
+              });
+          } else if (this.userType === "enterprise") {
+            this.$store
+              .dispatch("auth/registerEnterprise", newUser)
+              .then((response) => {
+                this.isConfirm = true;
+                this.resetForm();
+                console.log(response.data);
+              });
+          }
+          // this.signUpUser(newUser);
         } else this.notMatch = true;
       }
     },
